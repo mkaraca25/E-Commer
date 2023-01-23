@@ -25,7 +25,7 @@ const ItemDetails = () => {
 
   async function getItem() {
     const item = await fetch(
-      `http://localhost:2000/api/items/${itemId}?populate=image`,
+      `http://localhost:1337/api/items/${itemId}?populate=image`,
       {
         method: "GET",
       }
@@ -34,9 +34,10 @@ const ItemDetails = () => {
     setItem(itemJson.data);
   }
 
+
   async function getItems() {
     const items = await fetch(
-      `http://localhost:2000/api/items?populate=image`,
+      `http://localhost:1337/api/items?populate=image`,
       {
         method: "GET",
       }
@@ -48,7 +49,7 @@ const ItemDetails = () => {
   useEffect(() => {
     getItem();
     getItems();
-  }, [itemId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [itemId]); 
 
   return (
     <Box width="80%" m="80px auto">
@@ -59,7 +60,7 @@ const ItemDetails = () => {
             alt={item?.name}
             width="100%"
             height="100%"
-            src={`http://localhost:2000${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
             style={{ objectFit: "contain" }}
           />
         </Box>
@@ -87,7 +88,7 @@ const ItemDetails = () => {
               mr="20px"
               p="2px 5px"
             >
-              <IconButton onClick={() => setCount(Math.max(count - 1, 0))}>
+              <IconButton onClick={() => setCount(Math.max(count - 1, 1))}>
                 <RemoveIcon />
               </IconButton>
               <Typography sx={{ p: "0 5px" }}>{count}</Typography>
@@ -111,7 +112,7 @@ const ItemDetails = () => {
           <Box>
             <Box m="20px 0 5px 0" display="flex">
               <FavoriteBorderOutlinedIcon />
-              <Typography sx={{ ml: "5px" }}>ADD TO WISHLIST</Typography>
+              <Typography sx={{ ml: "5px"}}>ADD TO WISHLIST</Typography>
             </Box>
             <Typography>CATEGORIES: {item?.attributes?.category}</Typography>
           </Box>
@@ -144,7 +145,7 @@ const ItemDetails = () => {
           columnGap="1.33%"
           justifyContent="space-between"
         >
-          {items.slice(0, 4).map((item, i) => (
+          {items.slice(0,4).map((item, i) => (
             <Item key={`${item.name}-${i}`} item={item} />
           ))}
         </Box>

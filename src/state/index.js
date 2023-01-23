@@ -39,6 +39,9 @@ export const cartSlice = createSlice({
         return item;
       });
     },
+    resetCart:(state)=>{
+      state.cart=[]
+    },
 
     setIsCartOpen: (state) => {
       state.isCartOpen = !state.isCartOpen;
@@ -52,7 +55,7 @@ export const {
   removeFromCart,
   increaseCount,
   decreaseCount,
-  setIsCartOpen,
+  setIsCartOpen,resetCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
